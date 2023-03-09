@@ -1,0 +1,70 @@
+{% extends 'shared/base.html' %} 
+{% load static %}
+
+{% block title %}
+    Login to FR Attendance 
+{% endblock %}
+
+{% block content %} 
+<div id="identity" style="background-image: url('{% static "/images/init_bg.png" %}');">
+    <div class="container">
+        <main role="main" class="pb-3">
+            <div class="row">
+                <div class="offset-md-4 col-md-4 col-sm-12 pt-5">
+                    <div class="text-center mb-2">
+                        <img src="{% static '/images/logo.png' %}" style="height:96px" />
+                        <p class="fs-4">Login to Smart Tollgate</h4>
+                    </div>
+                    <section>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="card">
+                                <div class="card-body pb-0">          
+                                        {% if messages %} 
+                                            <div class="text-danger mb-3">
+                                                {% for message in messages %} 
+                                                    {{message}}
+                                                {% endfor %} 
+                                            </div>
+                                        {% endif %}                                   
+                                    <div class="form-group mb-3">
+                                        <label for="Input_Email">Email</label>
+                                        <input class="form-control" type="text" data-val="true" data-val-required="The Email field is required." id="Input_Email" name="username" value="" required/>
+                                        <span class="text-danger field-validation-valid" data-valmsg-for="Input.Email" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="Input_Password">Password</label>
+                                        <input class="form-control" type="password" data-val="true" data-val-required="The Password field is required." id="Input_Password" name="password" required />
+                                        <span class="text-danger field-validation-valid" data-valmsg-for="Input.Password" data-valmsg-replace="true"></span>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <div class="checkbox">
+                                            <label for="Input_RememberMe">
+                                                <input type="checkbox" data-val="true" data-val-required="The Keep me signed in field is required." id="Input_RememberMe" name="Input.RememberMe" value="true" />
+                                                Keep me signed in
+                                            </label>
+                                        </div>
+                                        <div class="mt-2 mb-2"><a href="/ForgotPassword">Forgot your password?</a></div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="card-footer text-end">
+                                    <button type="submit" class="btn btn-primary">Log in <i class="fa fa-sign-in"></i></button>
+                                </div>
+                            </div>
+                            
+                        <input name="__RequestVerificationToken" type="hidden" value="CfDJ8GqzgRN1HJdDk81XFXYpeRFupHLOamKP1_6eHin0JBFFfPwcQ3eAJMfqF14HwXYDHnEuSC0dVpEKO6HAmKa9bdDNdAOFrdc0BZK_P3nAwbPOKgyNbUhAzD0bumnsq2SFcJfXDqGdXI68wT2L0G6CYiA" /><input name="Input.RememberMe" type="hidden" value="false" /></form>
+                    </section>
+                </div>
+                
+            </div>
+        </main>
+    </div>
+    <footer class="border-top border-light footer text-muted">
+        <div class="container">
+            &copy; 2023 - Smart Tollgate
+        </div>
+    </footer>
+</div>
+   
+{% endblock %}

@@ -1,0 +1,14 @@
+{% load static %}
+<h2>Plates returned</h2>
+
+{% for img, plate in mylist %}
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <img src="{% static 'data/' %}{{ img }}" width="300px" height="200px"/>         
+        </div>
+        <div class="col-md-6">
+            Predicted number plate: {{plate}}
+        </div>
+    </div>
+{% endfor %}
+
