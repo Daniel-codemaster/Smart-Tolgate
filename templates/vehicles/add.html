@@ -1,0 +1,65 @@
+{% extends 'shared/layout_base.html' %}
+{% load static %}
+
+{% block breadcrumb %} 
+    <a class="breadcrumb-item" href="/vehicles">Vehicles</a>
+    <a class="breadcrumb-item" href="">Add</a>
+{% endblock %}
+
+{% block main %} 
+    <div class="row">
+        <div class="col-md-9">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="mb-4 row">
+                            <label class="col-md-4">Number plate</label>
+                            <div class="col-md-8">
+                                {{form.number_plate}}
+                            </div>
+                        </div>
+                        <div class="mb-4 row">
+                            <label class="col-md-4">Class</label>
+                            <div class="col-md-8">
+                                {{form.type_id}}
+                            </div>
+                        </div>
+                        <div class="mb-4 row">
+                            <label class="col-md-4">Make</label>
+                            <div class="col-md-8">
+                                {{form.make}}
+                            </div>
+                        </div>
+                        <div class="mb-4 row">
+                            <label class="col-md-4">Model</label>
+                            <div class="col-md-8">
+                                {{form.model}}
+                            </div>
+                        </div>
+                        <div class="mb-4 row">
+                            <label class="col-md-4">Year</label>
+                            <div class="col-md-8">
+                                {{form.year}}
+                            </div>
+                        </div>
+                        <div class="mb-4 row">
+                            <label class="col-md-4">Owner</label>
+                            <div class="col-md-8">
+                                {{form.owner}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-end">
+                        <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Save</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}
+
+
+
+

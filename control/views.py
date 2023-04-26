@@ -7,6 +7,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import easyocr
 import itertools
+import re
+from core.models import *
 
 def NMS(boxes, class_ids, confidences, overlapThresh = 0.5):
 
@@ -80,7 +82,6 @@ def index_view(request):
     model_weights_path = os.path.join(BASE_DIR, 'media', 'model', 'weights', 'model.weights')
     class_names_path = os.path.join(BASE_DIR, 'media', 'model', 'class.names')
 
-
     video_capture = cv2.VideoCapture(0)
 
     capture = True
@@ -92,7 +93,8 @@ def index_view(request):
 
     net = cv2.dnn.readNetFromDarknet(model_cfg_path, model_weights_path)
 
-
+    plates=""
+    country = "Not Zimbabwe"
     while capture:
         ret, img = video_capture.read()
 
@@ -147,7 +149,7 @@ def index_view(request):
 
             _, license_plate_thresh = cv2.threshold(license_plate_gray, 64, 255, cv2.THRESH_BINARY_INV)
 
-            output = reader.readtext(license_plate_thresh)
+            output = reader.readtext(license_plate)
 
             number = ""
 
@@ -155,10 +157,37 @@ def index_view(request):
                 text_bbox, text, text_score = out
                 
                 number = number + text
-                print(number)
-            
-            
 
+            print(number)
+            if (text_score > 0.5):
+                text = text.replace(" ", "")
+                pattern = r'^[a-zA-Z]{3}\d{4}$'
+                
+                if re.match(pattern, number):                  
+                    print("Zim plate: "+number)
+                    country = "Zimbabwe"
+                    vehicle = Vehicle.objects.get(number_plate=number)
+
+                    if vehicle:
+                        acc = Account.objects.get(owner = vehicle.owner.id)
+                        amount = 2
+                        if(vehicle.type_id != 0):
+                            amount = 5
+
+                        trans = Transaction.objects.create(amount=amount, account=acc, vehicle=vehicle)
+                        trans.save()
+
+                        acc.balance -= amount
+                        acc.save()
+
+                        #stop video stream
+                        capture = False
+                else:
+                    print("Not zim plate")
+                    plates = number
+                    capture = False
+                
+            
         cv2.imshow('Video', img)
         cv2.setWindowProperty('Video', cv2.WND_PROP_TOPMOST, 1)
         
@@ -276,4 +305,4 @@ def index_view(request):
             }     
     '''
 
-    return render(request, 'control/index.html', {})
+    return render(request, 'control/index.html', {'plates':plates, 'country': country})

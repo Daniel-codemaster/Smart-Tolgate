@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'identity',
     'vehicles',
     'control',
+    'accounts',
+    'transactions',
 ]
 
 MIDDLEWARE = [

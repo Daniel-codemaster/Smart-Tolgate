@@ -23,7 +23,9 @@ urlpatterns = [
     path('', include('core.urls')),
     path('identity/', include('identity.urls')),
     path('vehicles/', include('vehicles.urls')),
-   path('control/', include('control.urls')),
+    path('control/', include('control.urls')),
+    path('accounts/', include('accounts.urls')),
+    path('transactions/', include('transactions.urls')),
 ]
 if settings.DEBUG is True:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

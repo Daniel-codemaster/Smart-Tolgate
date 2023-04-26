@@ -64,8 +64,8 @@
                         <div class="title-bar d-flex mb-3">
                             {% if section.page_title %}                            
                                 <h4>{{ section.page_title }}</h4>
-                            
-                            {% elif section.actionbar %}
+                            {% endif %}
+                            {% if section.actionbar %}
                                 <div class="ms-auto">{% block actionbar %}{% endblock %}</div>
                             {% endif %}
                         </div>

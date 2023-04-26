@@ -1,0 +1,78 @@
+{% extends 'shared/layout_base.html' %}
+{% load static %}
+{% block breadcrumb %} 
+    <a class="breadcrumb-item" href="/accounts">Accounts</a>
+    <a class="breadcrumb-item" href="#">{{account.owner}}</a>
+{% endblock %}
+
+{% block actionbar_s %}
+    <a class="btn btn-primary" href="../edit/{{account.id}}"><i class="fa fa-pencil"></i> Edit</a>
+{% endblock %}
+
+{% block sidebar %} 
+
+    <div class="list-group list-group-flush border-bottom scrollarea w-100">
+        
+        <a class="list-group-item list-group-item-light justify-content-between d-flex align-items-center list-group-item-action border-bottom" href="../deposit/{{account.id}}">
+            <div>Add deposit</div>
+            <i class="fa fa-money-bill-alt"></i>
+        </a>
+        <a class="list-group-item list-group-item-light justify-content-between d-flex align-items-center list-group-item-action border-bottom" href="">
+            <div>Transactions</div>
+            <i class="fa fa-money-bill-alt"></i>
+        </a>
+       
+    </div>
+
+{% endblock %}
+
+{% block main_s %}         
+    <div class="card">
+        <div class="card-body">
+            <div class="mb-4 row">
+                <label class="col-md-4">Account name</label>
+                <div class="col-md-8">
+                    {{account.owner}}
+                </div>
+            </div>
+            <div class="mb-4 row">
+                <label class="col-md-4">Balance</label>
+                <div class="col-md-8">
+                    {{account.balance}}
+                </div>
+            </div>
+            <h5>Personal info</h5>
+            <hr />
+            <div class="mb-4 row">
+                <label class="col-md-4">Fullname</label>
+                <div class="col-md-8">
+                    {{account.owner}}
+                </div>
+            </div>
+            <div class="mb-4 row">
+                <label class="col-md-4">Phone</label>
+                <div class="col-md-8">
+                    {{owner.phone}}
+                </div>
+            </div>
+            <div class="mb-4 row">
+                <label class="col-md-4">Address</label>
+                <div class="col-md-8">
+                    {{owner.address}}
+                </div>
+            </div>
+            <div class="mb-4 row">
+                <label class="col-md-4">City</label>
+                <div class="col-md-8">
+                    {{owner.city}}
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+{% endblock %}
+
+
+
+

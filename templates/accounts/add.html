@@ -1,0 +1,60 @@
+{% extends 'shared/layout_base.html' %}
+{% load static %}
+
+{% block breadcrumb %} 
+    <a class="breadcrumb-item" href="/accounts">Accounts</a>
+    <a class="breadcrumb-item" href="#">Add</a>
+{% endblock %}
+
+{% block main %} 
+    <div class="row">
+        <div class="col-md-9">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="mb-4 row">
+                            <label class="col-md-4">Forename(s)</label>
+                            <div class="col-md-8">
+                                {{form.forename}}
+                            </div>
+                        </div>
+                        <div class="mb-4 row">
+                            <label class="col-md-4">Surname</label>
+                            <div class="col-md-8">
+                                {{form.surname}}
+                            </div>
+                        </div>
+                        <div class="mb-4 row">
+                            <label class="col-md-4">Phone</label>
+                            <div class="col-md-8">
+                                {{form.phone}}
+                            </div>
+                        </div>
+                        <div class="mb-4 row">
+                            <label class="col-md-4">Address</label>
+                            <div class="col-md-8">
+                                {{form.address}}
+                            </div>
+                        </div>
+                        <div class="mb-4 row">
+                            <label class="col-md-4">City</label>
+                            <div class="col-md-8">
+                                {{form.city}}
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="card-footer text-end">
+                        <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Save</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
